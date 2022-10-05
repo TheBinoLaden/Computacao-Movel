@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Paint</string>
+    <string name="app_name">Main page</string>
+    <string name="button_1">Settings</string>
+    <string name="button_2">About</string>
+    <string name="title">Splash</string>
+    <string name="start">Start</string>
+    <string name="information_slot">Welcome to the first app \n Rodrigo Albino \n nº 49027</string>
 </resources>
