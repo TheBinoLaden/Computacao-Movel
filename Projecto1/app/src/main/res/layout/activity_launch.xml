@@ -22,18 +22,17 @@
         app:layout_constraintVertical_bias="0.294" />
 
     <Button
-        android:id="@+id/button_1"
-        android:layout_width="154dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginEnd="128dp"
+        android:id="@+id/start"
+        android:layout_width="123dp"
+        android:layout_height="83dp"
         android:backgroundTint="@android:color/darker_gray"
         android:text="@string/start"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/launch_page"
-        app:layout_constraintVertical_bias="0.493" />
+        app:layout_constraintVertical_bias="0.342" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
