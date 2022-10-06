@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
     private Button settings;
     private Button about;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,12 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
         about = (Button) findViewById(R.id.about);
         settings.setOnClickListener(view -> {
-            final Intent intent = new Intent(MainActivity.this, Launch_Activity.class);
+            final Intent intent = new Intent(MainActivity.this, Settings.class);
             startActivity(intent);
         });
 
         about.setOnClickListener(view -> {
-            final Intent intent = new Intent(MainActivity.this, Launch_Activity.class);
+            final Intent intent = new Intent(MainActivity.this, About.class);
             startActivity(intent);
         });
 
