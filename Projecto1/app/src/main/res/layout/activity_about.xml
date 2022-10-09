@@ -7,25 +7,22 @@
     android:background="#7DB0D8"
     tools:context=".About">
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="306dp"
-            android:layout_height="189dp"
-            android:layout_marginStart="93dp"
-            android:layout_marginTop="435dp"
-            android:layout_marginEnd="93dp"
-            android:layout_marginBottom="348dp"
-            android:background="#E6E3E3"
-            android:ems="10"
-            android:foregroundGravity="center_vertical|center"
-            android:gravity="center"
-            android:inputType="textMultiLine"
-            android:text="@string/information_slot"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.506"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="227dp"
+        android:layout_height="134dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginEnd="93dp"
+        android:background="#E6E3E3"
+        android:ems="10"
+        android:foregroundGravity="center_vertical|center"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:text="@string/information_slot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.476" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
