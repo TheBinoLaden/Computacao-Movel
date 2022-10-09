@@ -7,11 +7,58 @@
     android:background="#7DB0D8"
     tools:context=".Settings" >
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="79dp"
-        android:layout_height="60dp"
-        android:text="Switch"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="164dp" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/PageSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#939191"
+            android:gravity="center"
+            android:text="@string/pageSettings"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:id="@+id/greenColor"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:text="@string/green_color"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/darker_blue"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:text="@string/darker_blue"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/buttonSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#959595"
+            android:gravity="center"
+            android:text="@string/buttonsSettings"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:id="@+id/change_color"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:text="@string/buttonColor"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

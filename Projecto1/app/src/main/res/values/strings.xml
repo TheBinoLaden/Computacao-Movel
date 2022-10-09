@@ -9,5 +9,8 @@
     <string name="button_1">Settings</string>
     <string name="green_color">Green</string>
     <string name="darker_blue">Dark gradient</string>
+    <string name="buttonColor">Button color change</string>
+    <string name="buttonsSettings">Buttons Settings</string>
+    <string name="pageSettings">Page Settings</string>
     <!-- String for Settings  -->
 </resources>
