@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7DB0D8"
-    tools:context=".Settings">
+    tools:context=".Settings"
+    android:id="@+id/Settings">
 
     <Button
         android:id="@+id/back_settings"
@@ -13,7 +14,9 @@
         android:layout_height="56dp"
         android:layout_marginStart="243dp"
         android:layout_marginBottom="4dp"
+        android:background="#9A9595"
         android:text="Back"
+        android:textColorHighlight="#7A7A7A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

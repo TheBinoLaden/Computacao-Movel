@@ -1,12 +1,10 @@
 <resources>
     <string name="app_name">Main page</string>
-    <string name="button_2">About</string>
     <string name="title">Splash</string>
     <string name="start">Start</string>
     <string name="information_slot">Welcome to the first app \n Rodrigo Albino \n nº 49027 \n Group I</string>
 
     <!-- String for Settings  -->
-    <string name="button_1">Settings</string>
     <string name="green_color">Green</string>
     <string name="darker_blue">Dark gradient</string>
     <string name="buttonColor">Button color change</string>
@@ -15,4 +13,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- String for Settings  -->
+
+    <!-- String for the Main Fragments -->
+    <string name="canvas">Canvas</string>
+    <string name="palette">Palette</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <!-- String for the Main Fragments -->
 </resources>
