@@ -1,7 +1,7 @@
 package com.example.paint;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,17 +10,15 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import utils.ResetUtils;
+import utils.SharePreferencesUtils;
 
 public class Settings extends AppCompatActivity {
 
@@ -30,35 +28,30 @@ public class Settings extends AppCompatActivity {
     private final List<SwitchCompat> switches = new ArrayList<>(3);
     private Button back;
     private final Map<SwitchCompat, LocalTime> switchTimeClicked = new HashMap<>(3);
-    private static final String PROP_FILE = "app.properties";
     private static final String COLOR_PROP = "color_background";
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        try {
-            Properties properties = new Properties();
-            try (InputStream inputStream = getBaseContext().getAssets().open(PROP_FILE)) {
-                properties.load(inputStream);
-            }
-            final String value = properties.getProperty(COLOR_PROP);
 
-            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(value));
-            initializeAttributes();
-            setOnClick(properties);
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        String color = (String) SharePreferencesUtils.getInformation(pref, COLOR_PROP);
 
-        } catch (final IOException e) {
-            Log.e("ExceptionCaught", "error " + e.getMessage());
-            e.printStackTrace();
+        if (color == null) {
+            color = (String) SharePreferencesUtils.getInformation(pref, "default_color");
+            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
+        } else {
+            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
         }
+        initializeAttributes();
+        setOnClick(pref);
+
 
     }
 
-    public void changeColors(final Properties properties) {
+    public void changeColors(final SharedPreferences sharedPreferences) {
 
         for (SwitchCompat switchCompat : switches) {
             if (switchCompat.isChecked()) {
@@ -74,11 +67,12 @@ public class Settings extends AppCompatActivity {
                     Arrays.asList(colorGreen, darkBlue),
                     Arrays.asList(switchTimeClicked.get(colorGreen),
                             switchTimeClicked.get(darkBlue)));
-            properties.setProperty(COLOR_PROP, "#7DB0D8");
-            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor("#7DB0D8"));
+            String color = (String) SharePreferencesUtils.getInformation(sharedPreferences,
+                    "default_color");
+            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
         } else {
-            final String value = properties.getProperty(COLOR_PROP);
-            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(value));
+            String color = (String) SharePreferencesUtils.getInformation(sharedPreferences, COLOR_PROP);
+            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
         }
     }
 
@@ -103,18 +97,18 @@ public class Settings extends AppCompatActivity {
         switchTimeClicked.put(changeButtonColor, null);
     }
 
-    private void setOnClick(final Properties properties) {
+    private void setOnClick(final SharedPreferences sharedPreferences) {
 
 
         colorGreen.setOnClickListener(view -> {
             switchTimeClicked.replace(colorGreen, LocalTime.now());
-            properties.setProperty(COLOR_PROP, "#52BE80");
-            changeColors(properties);
+            SharePreferencesUtils.putInformation(sharedPreferences, COLOR_PROP, "#52BE80");
+            changeColors(sharedPreferences);
         });
         darkBlue.setOnClickListener(view -> {
             switchTimeClicked.replace(darkBlue, LocalTime.now());
-            properties.setProperty(COLOR_PROP, "#1A5276");
-            changeColors(properties);
+            SharePreferencesUtils.putInformation(sharedPreferences, COLOR_PROP, "#1A5276");
+            changeColors(sharedPreferences);
         });
         back.setOnClickListener(view -> {
             final Intent intent = new Intent(Settings.this, MainActivity.class);

@@ -2,11 +2,13 @@ package com.example.paint;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import utils.SharePreferencesUtils;
 
 public class Launch_Activity extends AppCompatActivity {
 
@@ -19,7 +21,10 @@ public class Launch_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
 
-        button = (Button) findViewById(R.id.start);
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        SharePreferencesUtils.putInformation(pref, "default_color", "#7DB0D8");
+
+        button = findViewById(R.id.start);
         button.setOnClickListener(view -> {
             final Intent intent = new Intent(Launch_Activity.this, MainActivity.class);
             startActivity(intent);

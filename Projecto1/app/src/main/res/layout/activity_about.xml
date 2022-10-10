@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7DB0D8"
-    tools:context=".About">
+    tools:context=".About"
+    android:id="@+id/aboutPage">
 
     <EditText
         android:id="@+id/editTextTextPersonName"

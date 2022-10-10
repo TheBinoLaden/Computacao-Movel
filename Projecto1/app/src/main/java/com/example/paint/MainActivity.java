@@ -1,9 +1,9 @@
 package com.example.paint;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,18 +11,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import fragments.CanvasFragment;
 import fragments.PaletteFragment;
+import utils.SharePreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button settings, about, canvas, palette;
 
-    private static final String PROP_FILE = "app.properties";
     private static final String COLOR_PROP = "color_background";
 
     @Override
@@ -30,17 +26,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            Properties properties = new Properties();
-            try (InputStream inputStream = getBaseContext().getAssets().open(PROP_FILE)) {
-                properties.load(inputStream);
-            }
-            final String value = properties.getProperty(COLOR_PROP);
-            findViewById(R.id.MainRelativeLayout).setBackgroundColor(Color.parseColor(value));
-        } catch (final IOException e) {
-            Log.e("ExceptionCaught", "error " + e.getMessage());
-            e.printStackTrace();
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        String color = (String) SharePreferencesUtils.getInformation(pref, COLOR_PROP);
+
+        if (color == null) {
+            color = (String) SharePreferencesUtils.getInformation(pref, "default_color");
+            findViewById(R.id.MainRelativeLayout).setBackgroundColor(Color.parseColor(color));
+        } else {
+            findViewById(R.id.MainRelativeLayout).setBackgroundColor(Color.parseColor(color));
         }
+
         initializeAttributes();
         setOnClick();
 
