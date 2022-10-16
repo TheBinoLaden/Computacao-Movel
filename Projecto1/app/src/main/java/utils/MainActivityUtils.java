@@ -39,7 +39,7 @@ public class MainActivityUtils {
         GestureDetector detector = new GestureDetector(context, canvasListener);
 
         CanvasView paintCanvas = new CanvasView(context, null, detector);
-        final CanvasFragment canvasFragment = new CanvasFragment(detector);
+        CanvasFragment canvasFragment = new CanvasFragment(detector);
         canvasListener.setCanvas(paintCanvas);
 
         hideButtons(buttons);

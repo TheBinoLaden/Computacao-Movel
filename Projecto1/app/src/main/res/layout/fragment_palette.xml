@@ -1,8 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fragments.PaletteFragment">
+
+    <View
+        android:id="@+id/ColorBoard"
+        android:layout_width="297dp"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="340dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="19dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/PaletteFragment"
@@ -13,5 +28,39 @@
         android:background="@color/teal_200"
         android:textColor="@color/black"
         android:textSize="30sp" />
+
+    <SeekBar
+        android:id="@+id/redBar"
+        android:layout_width="322dp"
+        android:layout_height="29dp"
+        android:layout_above="@+id/greenBar"
+        android:layout_marginBottom="-2dp"
+        android:max="255"
+        android:progress="0"
+        android:progressTint="#DA0303"
+        android:thumbTint="#DA0303" />
+
+    <SeekBar
+        android:id="@+id/greenBar"
+        android:layout_width="322dp"
+        android:layout_height="29dp"
+        android:layout_above="@+id/blueBar"
+        android:layout_marginBottom="0dp"
+        android:max="255"
+        android:progress="0"
+        android:progressTint="#4EDA03"
+        android:thumbTint="#4EDA03" />
+
+    <SeekBar
+        android:id="@+id/blueBar"
+        android:layout_width="322dp"
+        android:layout_height="29dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="2dp"
+        android:max="255"
+        android:progress="0"
+        android:progressTint="#06C5FF"
+        android:thumbTint="#06C5FF" />
+
 
 </RelativeLayout>
