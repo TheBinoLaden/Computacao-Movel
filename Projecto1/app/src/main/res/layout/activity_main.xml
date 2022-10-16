@@ -10,51 +10,69 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="600sp" />
+        android:layout_height="600sp">
+
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/canvas"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="6dp"
         android:backgroundTint="@android:color/darker_gray"
-        android:textColor="@color/black"
         android:text="@string/canvas"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginStart="10dp" />
+        android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/palette"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:textColor="@color/black"
-        android:text="@string/palette"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginStart="250dp" />
+    <!-- New buttons after canvas -->
 
     <Button
         android:id="@+id/about"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:textColor="@color/black"
-        android:text="@string/about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp"
-        android:layout_marginStart="250dp" />
+        android:layout_marginStart="47dp"
+        android:layout_marginBottom="6dp"
+        android:layout_toEndOf="@+id/settings"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="@string/about"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/settings"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:textColor="@color/black"
-        android:text="@string/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="25dp"
-        android:layout_marginStart="10dp" />
+        android:layout_marginStart="49dp"
+        android:layout_marginBottom="6dp"
+        android:layout_toEndOf="@+id/canvas"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="@string/settings"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/backMain"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="250dp"
+        android:layout_marginBottom="-4dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="@string/backButton"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/palette"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="-4dp"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="@string/palette"
+        android:textColor="@color/black" />
 
 
 </RelativeLayout>

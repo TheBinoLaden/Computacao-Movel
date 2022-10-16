@@ -4,20 +4,27 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import fragments.CanvasFragment;
-import fragments.PaletteFragment;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import utils.MainActivityUtils;
 import utils.SharePreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button settings, about, canvas, palette;
+    private Button settings;
+    private Button about;
+    private Button canvas;
+    private Button backCanvas;
+    private Button paletteCanvas;
+
+    private List<Button> mainButtons = new ArrayList<>(3);
 
     private static final String COLOR_PROP = "color_background";
 
@@ -45,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
         settings = findViewById(R.id.settings);
         about = findViewById(R.id.about);
         canvas = findViewById(R.id.canvas);
-        palette = findViewById(R.id.palette);
+        mainButtons = Arrays.asList(settings, about, canvas);
+
+        //Canvas button
+        backCanvas = findViewById(R.id.backMain);
+        paletteCanvas = findViewById(R.id.palette);
+        backCanvas.setVisibility(View.GONE);
+        paletteCanvas.setVisibility(View.GONE);
     }
 
     private void setOnClick() {
@@ -59,14 +72,18 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        canvas.setOnClickListener(view -> replaceFragment(new CanvasFragment()));
-        palette.setOnClickListener(view -> replaceFragment(new PaletteFragment()));
-    }
+        canvas.setOnClickListener(view -> {
+            MainActivityUtils.canvasButtonAction(
+                    getApplicationContext(), mainButtons, getSupportFragmentManager());
+            backCanvas.setVisibility(View.VISIBLE);
+            paletteCanvas.setVisibility(View.VISIBLE);
+        });
+        paletteCanvas.setOnClickListener(view -> MainActivityUtils.paletteButtonAction(
+                mainButtons, getSupportFragmentManager()));
 
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.commit();
+        backCanvas.setOnClickListener(view -> {
+            final Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
     }
 }
