@@ -105,18 +105,17 @@ public class Settings extends AppCompatActivity {
                 switchTimeClicked.replace(colorGreen, LocalTime.now());
                 SharePreferencesUtils.putInformation(sharedPreferences, COLOR_PROP, "#52BE80");
                 changeColors(sharedPreferences);
-            } else {
-                ResetUtils.resetToColor(sharedPreferences, colorGreen, darkBlue);
             }
+            ResetUtils.resetToColor(sharedPreferences, colorGreen, darkBlue);
         });
         darkBlue.setOnClickListener(view -> {
             if (darkBlue.isChecked()) {
                 switchTimeClicked.replace(darkBlue, LocalTime.now());
                 SharePreferencesUtils.putInformation(sharedPreferences, COLOR_PROP, "#1A5276");
                 changeColors(sharedPreferences);
-            } else {
-                ResetUtils.resetToColor(sharedPreferences, darkBlue, colorGreen);
             }
+            ResetUtils.resetToColor(sharedPreferences, darkBlue, colorGreen);
+
         });
         back.setOnClickListener(view -> {
             final Intent intent = new Intent(Settings.this, MainActivity.class);

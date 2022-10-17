@@ -47,7 +47,7 @@ public class ResetUtils {
     public static void resetToColor(final SharedPreferences prefs,
                                     final SwitchCompat button1, final SwitchCompat button2) {
         if (button1.isChecked() & button2.isChecked()) {
-            SharePreferencesUtils.removeInformation(prefs.edit(), "color_background");
+            SharePreferencesUtils.putInformation(prefs, "color_background", null);
         }
     }
 }
