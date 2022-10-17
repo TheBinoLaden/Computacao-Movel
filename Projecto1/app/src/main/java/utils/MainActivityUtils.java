@@ -54,7 +54,7 @@ public class MainActivityUtils {
      */
     public static void paletteButtonAction(final List<Button> buttons, final FragmentManager manager) {
         hideButtons(buttons);
-        replaceFragment(new PaletteFragment(), manager);
+        addFragment(new PaletteFragment(), manager);
 
     }
 
@@ -72,7 +72,7 @@ public class MainActivityUtils {
 
     private static void addFragment(final Fragment fragment, final FragmentManager manager) {
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        fragmentTransaction.add(fragment, null);
+        fragmentTransaction.add(R.id.frameLayout, fragment, null);
         fragmentTransaction.commit();
     }
 }

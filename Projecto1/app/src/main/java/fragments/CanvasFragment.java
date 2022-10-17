@@ -26,6 +26,8 @@ public class CanvasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return new CanvasView(container.getContext(), null, this.detector);
+
+        final CanvasView view = new CanvasView(container.getContext(), null, this.detector);
+        return view;
     }
 }

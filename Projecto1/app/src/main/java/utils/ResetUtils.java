@@ -1,6 +1,9 @@
 package utils;
 
+import android.content.SharedPreferences;
 import android.widget.CompoundButton;
+
+import androidx.appcompat.widget.SwitchCompat;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -39,5 +42,12 @@ public class ResetUtils {
             buttons.get(0).setChecked(Boolean.FALSE);
         }
 
+    }
+
+    public static void resetToColor(final SharedPreferences prefs,
+                                    final SwitchCompat button1, final SwitchCompat button2) {
+        if (button1.isChecked() & button2.isChecked()) {
+            SharePreferencesUtils.removeInformation(prefs.edit(), "color_background");
+        }
     }
 }

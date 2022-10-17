@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#7DB0D8"
-    tools:context=".Launch_Activity">
+    tools:context=".Launch_Activity"
+    android:id="@+id/LaunchConstraintPage">
 
     <TextView
         android:id="@+id/launch_page"

@@ -25,10 +25,11 @@
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-11dp"
-        android:background="@color/teal_200"
+        android:background="#A13D6E6A"
         android:textColor="@color/black"
         android:textSize="30sp" />
 
+    <!-- Setters for RGB -->
     <SeekBar
         android:id="@+id/redBar"
         android:layout_width="322dp"
