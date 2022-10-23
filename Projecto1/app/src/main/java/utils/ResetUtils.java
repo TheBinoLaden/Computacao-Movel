@@ -1,12 +1,12 @@
 package utils;
 
-import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.CompoundButton;
-
-import androidx.appcompat.widget.SwitchCompat;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Utils used to reset the buttons or any subclass.
@@ -36,18 +36,19 @@ public class ResetUtils {
      */
     public static void validateLastChecked(final List<? extends CompoundButton> buttons,
                                            final List<LocalTime> times) {
+
+        List<LocalTime> aux = times.stream().filter(Objects::nonNull).collect(Collectors.toList());
+
+        // If something is null this condition will safeguard against NPE
+        if (aux.size() != times.size() && !aux.isEmpty()) {
+            Log.d("Different Size", "the timeStamp null elements are " + aux.size());
+            buttons.get(times.indexOf(aux.get(0))).setChecked(Boolean.FALSE);
+            return;
+        }
         if (times.get(0).isAfter(times.get(1))) {
             buttons.get(1).setChecked(Boolean.FALSE);
         } else if (times.get(1).isAfter(times.get(0))) {
             buttons.get(0).setChecked(Boolean.FALSE);
-        }
-
-    }
-
-    public static void resetToColor(final SharedPreferences prefs,
-                                    final SwitchCompat button1, final SwitchCompat button2) {
-        if (button1.isChecked() & button2.isChecked()) {
-            SharePreferencesUtils.putInformation(prefs, "color_background", null);
         }
     }
 }

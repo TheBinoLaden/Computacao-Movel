@@ -1,7 +1,6 @@
 package com.example.paint;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -14,31 +13,26 @@ import java.util.Arrays;
 import java.util.List;
 
 import utils.MainActivityUtils;
-import utils.SharePreferencesUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String COLOR_PROP = "color_background";
     private Button settings;
     private Button about;
     private Button canvas;
     private Button backCanvas;
     private Button paletteCanvas;
-
+    private String color;
     private List<Button> mainButtons = new ArrayList<>(3);
-
-    private static final String COLOR_PROP = "color_background";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-        String color = (String) SharePreferencesUtils.getInformation(pref, COLOR_PROP);
-
+        this.color = getIntent().getStringExtra(COLOR_PROP);
         if (color == null) {
-            color = (String) SharePreferencesUtils.getInformation(pref, "default_color");
-            findViewById(R.id.MainRelativeLayout).setBackgroundColor(Color.parseColor(color));
+            findViewById(R.id.MainRelativeLayout).setBackgroundColor(Color.parseColor("#7DB0D8"));
         } else {
             findViewById(R.id.MainRelativeLayout).setBackgroundColor(Color.parseColor(color));
         }
@@ -64,11 +58,13 @@ public class MainActivity extends AppCompatActivity {
     private void setOnClick() {
         settings.setOnClickListener(view -> {
             final Intent intent = new Intent(MainActivity.this, Settings.class);
+            intent.putExtra(COLOR_PROP, this.color);
             startActivity(intent);
         });
 
         about.setOnClickListener(view -> {
             final Intent intent = new Intent(MainActivity.this, About.class);
+            intent.putExtra(COLOR_PROP, this.color);
             startActivity(intent);
         });
 
@@ -78,11 +74,13 @@ public class MainActivity extends AppCompatActivity {
             backCanvas.setVisibility(View.VISIBLE);
             paletteCanvas.setVisibility(View.VISIBLE);
         });
-        paletteCanvas.setOnClickListener(view -> MainActivityUtils.paletteButtonAction(
-                mainButtons, getSupportFragmentManager()));
+        paletteCanvas.setOnClickListener(view ->
+                MainActivityUtils.paletteButtonAction(mainButtons, getSupportFragmentManager()
+                ));
 
         backCanvas.setOnClickListener(view -> {
             final Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            intent.putExtra(COLOR_PROP, this.color);
             startActivity(intent);
         });
     }

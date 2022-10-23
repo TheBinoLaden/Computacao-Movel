@@ -17,6 +17,7 @@ public class CanvasListener extends GestureDetector.SimpleOnGestureListener {
     @Override
     public void onLongPress(MotionEvent motionEvent) {
         view.changeBackground();
+
     }
 
     /////////OnDoubleTapListener
@@ -25,6 +26,5 @@ public class CanvasListener extends GestureDetector.SimpleOnGestureListener {
         view.erase();
         return false;
     }
-
 
 }

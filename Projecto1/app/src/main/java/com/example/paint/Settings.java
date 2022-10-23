@@ -18,40 +18,37 @@ import java.util.List;
 import java.util.Map;
 
 import utils.ResetUtils;
-import utils.SharePreferencesUtils;
 
 public class Settings extends AppCompatActivity {
 
+    private static final String COLOR_PROP = "color_background";
+    private static final String PREF_SETTINGS = "SettingsPref";
+    private final List<SwitchCompat> switches = new ArrayList<>(3);
+    private final Map<SwitchCompat, LocalTime> switchTimeClicked = new HashMap<>(3);
+    private String color;
     private SwitchCompat colorGreen;
     private SwitchCompat darkBlue;
     private SwitchCompat changeButtonColor;
-    private final List<SwitchCompat> switches = new ArrayList<>(3);
     private Button back;
-    private final Map<SwitchCompat, LocalTime> switchTimeClicked = new HashMap<>(3);
-    private static final String COLOR_PROP = "color_background";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        final SharedPreferences preferences =
+                getApplicationContext().getSharedPreferences(PREF_SETTINGS, 0);
+        this.color = getIntent().getExtras().getString(COLOR_PROP);
+        findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
 
-        final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-        String color = (String) SharePreferencesUtils.getInformation(pref, COLOR_PROP);
-
-        if (color == null) {
-            color = (String) SharePreferencesUtils.getInformation(pref, "default_color");
-            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
-        } else {
-            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
-        }
         initializeAttributes();
-        setOnClick(pref);
+        setOnClick(preferences);
+        checkPreferencesChecked(preferences);
 
 
     }
 
-    public void changeColors(final SharedPreferences sharedPreferences) {
+    public void changeColors() {
 
         for (SwitchCompat switchCompat : switches) {
             if (switchCompat.isChecked()) {
@@ -67,12 +64,12 @@ public class Settings extends AppCompatActivity {
                     Arrays.asList(colorGreen, darkBlue),
                     Arrays.asList(switchTimeClicked.get(colorGreen),
                             switchTimeClicked.get(darkBlue)));
-            String color = (String) SharePreferencesUtils.getInformation(sharedPreferences,
-                    "default_color");
-            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
+            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor("#7DB0D8"));
+            colorGreen.setChecked(Boolean.FALSE);
+            darkBlue.setChecked(Boolean.FALSE);
         } else {
-            String color = (String) SharePreferencesUtils.getInformation(sharedPreferences, COLOR_PROP);
-            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
+
+            findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(this.color));
         }
     }
 
@@ -97,30 +94,59 @@ public class Settings extends AppCompatActivity {
         switchTimeClicked.put(changeButtonColor, null);
     }
 
-    private void setOnClick(final SharedPreferences sharedPreferences) {
+    private void setOnClick(final SharedPreferences prefs) {
 
 
         colorGreen.setOnClickListener(view -> {
             if (colorGreen.isChecked()) {
                 switchTimeClicked.replace(colorGreen, LocalTime.now());
-                SharePreferencesUtils.putInformation(sharedPreferences, COLOR_PROP, "#52BE80");
-                changeColors(sharedPreferences);
+                this.color = "#52BE80";
+                changeColors();
+            } else if (!colorGreen.isChecked() && !darkBlue.isChecked()) {
+                this.color = "#7DB0D8";
+                changeColors();
             }
-            ResetUtils.resetToColor(sharedPreferences, colorGreen, darkBlue);
         });
         darkBlue.setOnClickListener(view -> {
             if (darkBlue.isChecked()) {
                 switchTimeClicked.replace(darkBlue, LocalTime.now());
-                SharePreferencesUtils.putInformation(sharedPreferences, COLOR_PROP, "#1A5276");
-                changeColors(sharedPreferences);
+                this.color = "#1A5276";
+                changeColors();
+            } else if (!darkBlue.isChecked() && !colorGreen.isChecked()) {
+                this.color = "#7DB0D8";
+                changeColors();
             }
-            ResetUtils.resetToColor(sharedPreferences, darkBlue, colorGreen);
-
         });
         back.setOnClickListener(view -> {
             final Intent intent = new Intent(Settings.this, MainActivity.class);
+            intent.putExtra(COLOR_PROP, this.color);
+            final SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("color_green", colorGreen.isChecked());
+            editor.putBoolean("darkBlue", darkBlue.isChecked());
+            editor.putBoolean("changeButtonColor", changeButtonColor.isChecked());
+            editor.apply();
             startActivity(intent);
         });
+    }
+
+    private void checkPreferencesChecked(final SharedPreferences prefs) {
+
+        final Map<String, ?> mapOfElements = prefs.getAll();
+        if (Boolean.TRUE.equals(mapOfElements.get("color_green"))) {
+            colorGreen.setChecked(Boolean.TRUE);
+        } else {
+            colorGreen.setChecked(Boolean.FALSE);
+        }
+        if (Boolean.TRUE.equals(mapOfElements.get("darkBlue"))) {
+            darkBlue.setChecked(Boolean.TRUE);
+        } else {
+            darkBlue.setChecked(Boolean.FALSE);
+        }
+        if (Boolean.TRUE.equals(mapOfElements.get("changeButtonColor"))) {
+            changeButtonColor.setChecked(Boolean.TRUE);
+        } else {
+            changeButtonColor.setChecked(Boolean.FALSE);
+        }
     }
 
 }

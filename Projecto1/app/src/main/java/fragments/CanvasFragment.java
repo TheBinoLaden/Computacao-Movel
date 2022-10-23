@@ -15,7 +15,7 @@ import views.CanvasView;
  */
 public class CanvasFragment extends Fragment {
 
-    View view;
+    CanvasView canvasView;
     GestureDetector detector;
 
     public CanvasFragment(final GestureDetector detector) {
@@ -26,8 +26,8 @@ public class CanvasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        final CanvasView view = new CanvasView(container.getContext(), null, this.detector);
-        return view;
+        this.canvasView = new CanvasView(container.getContext(), null, this.detector);
+        return canvasView;
     }
+
 }

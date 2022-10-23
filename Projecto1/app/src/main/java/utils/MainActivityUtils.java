@@ -52,10 +52,11 @@ public class MainActivityUtils {
      * @param buttons the list of buttons of the activity
      * @param manager the fragment manager
      */
-    public static void paletteButtonAction(final List<Button> buttons, final FragmentManager manager) {
+    public static void paletteButtonAction(final List<Button> buttons,
+                                           final FragmentManager manager) {
         hideButtons(buttons);
-        addFragment(new PaletteFragment(), manager);
-
+        PaletteFragment myFragment = new PaletteFragment();
+        addFragment(myFragment, manager);
     }
 
     private static void hideButtons(final List<Button> buttons) {
@@ -66,7 +67,7 @@ public class MainActivityUtils {
 
     private static void replaceFragment(Fragment fragment, final FragmentManager manager) {
         FragmentTransaction fragmentTransaction = manager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.replace(R.id.frameLayout, fragment, "CANVAS");
         fragmentTransaction.commit();
     }
 
