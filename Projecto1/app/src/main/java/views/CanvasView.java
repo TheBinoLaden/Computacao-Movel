@@ -50,7 +50,7 @@ public class CanvasView extends View implements View.OnTouchListener {
             paint.setColor(paints.get(i).getColor());
             canvas.drawPath(paths.get(i), paint);// draws the path with the paint
         }
-
+//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
 
     }
 
@@ -81,15 +81,15 @@ public class CanvasView extends View implements View.OnTouchListener {
                 return true;
             case MotionEvent.ACTION_MOVE:
                 // makes a line to the point each time this event is fired
-                final Path newPath = new Path(path);
                 if (pathHistory.isEmpty()) {
-                    pathIndex.put(0, newPath);
+                    pathIndex.put(0, path);
                 } else {
-                    pathIndex.put(pathIndex.size() + 1, newPath);
+                    pathIndex.put(pathIndex.size() + 1, path);
                 }
                 final Paint newPaint = new Paint();
-                pathHistory.put(newPath, newPaint);
-                newPath.lineTo(eventX, eventY);
+                newPaint.setColor(color);
+                pathHistory.put(new Path(path), newPaint);
+                path.lineTo(eventX, eventY);
                 break;
             case MotionEvent.ACTION_UP:// when you lift your finger
                 performClick();
