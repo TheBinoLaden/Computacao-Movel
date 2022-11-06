@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private Button canvas;
     private Button backCanvas;
     private Button paletteCanvas;
+    private Button map;
     private String color;
-    private List<Button> mainButtons = new ArrayList<>(3);
+    private List<Button> mainButtons = new ArrayList<>(4);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         settings = findViewById(R.id.settings);
         about = findViewById(R.id.about);
         canvas = findViewById(R.id.canvas);
-        mainButtons = Arrays.asList(settings, about, canvas);
+        map = findViewById(R.id.map);
+        mainButtons = Arrays.asList(settings, about, canvas, map);
 
         //Canvas button
         backCanvas = findViewById(R.id.backMain);
@@ -67,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(COLOR_PROP, this.color);
             startActivity(intent);
         });
+
+        map.setOnClickListener(view -> {
+            final Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            intent.putExtra(COLOR_PROP, this.color);
+            startActivity(intent);
+        });
+
+        // Fragments and back Button
 
         canvas.setOnClickListener(view -> {
             MainActivityUtils.canvasButtonAction(
