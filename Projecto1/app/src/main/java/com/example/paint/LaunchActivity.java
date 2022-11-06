@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class LaunchActivity extends AppCompatActivity {
+public class LaunchActivity extends ParentActivity {
 
     private static final String DEFAULT_COLOR_VALUE = "#7DB0D8";
     private static final String NAME_OF_PROP = "color_background";
@@ -18,7 +16,8 @@ public class LaunchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-
+        super.setOrientation();
+        super.setColorBackground(R.id.LaunchConstraintPage);
         startButton = findViewById(R.id.start);
         startButton.setOnClickListener(view -> {
             final Intent intent = new Intent(LaunchActivity.this, MainActivity.class);

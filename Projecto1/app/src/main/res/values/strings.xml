@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Main page</string>
+    <string name="app_name">Tutorial Project</string>
     <string name="title">Splash</string>
     <string name="start">Start</string>
     <string name="information_slot">Welcome to the first app \n Rodrigo Albino \n nº 49027 \n Group I</string>
@@ -20,6 +20,8 @@
     <string name="about">About</string>
     <string name="backButton">Back</string>
     <string name="map">Map</string>
+    <string name="Shake">Simulates the Shaking to Erase</string>
+    <string name="title_activity_maps">MapsActivity</string>
     <!-- String for the Main Fragments -->
 
 

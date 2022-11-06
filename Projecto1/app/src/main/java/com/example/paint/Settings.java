@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 import java.time.LocalTime;
@@ -19,7 +18,7 @@ import java.util.Map;
 
 import utils.ResetUtils;
 
-public class Settings extends AppCompatActivity {
+public class Settings extends ParentActivity {
 
     private static final String COLOR_PROP = "color_background";
     private static final String PREF_SETTINGS = "SettingsPref";
@@ -35,11 +34,10 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        super.setOrientation();
+        super.setColorBackground(R.id.Settings);
         final SharedPreferences preferences =
                 getApplicationContext().getSharedPreferences(PREF_SETTINGS, 0);
-        this.color = getIntent().getExtras().getString(COLOR_PROP);
-        findViewById(R.id.Settings).setBackgroundColor(Color.parseColor(color));
 
         initializeAttributes();
         setOnClick(preferences);

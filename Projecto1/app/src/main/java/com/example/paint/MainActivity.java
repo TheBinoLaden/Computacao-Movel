@@ -1,12 +1,9 @@
 package com.example.paint;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +11,7 @@ import java.util.List;
 
 import utils.MainActivityUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ParentActivity {
 
     private static final String COLOR_PROP = "color_background";
     private Button settings;
@@ -23,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private Button backCanvas;
     private Button paletteCanvas;
     private Button map;
-    private String color;
     private List<Button> mainButtons = new ArrayList<>(4);
 
     @Override
@@ -31,15 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.color = getIntent().getStringExtra(COLOR_PROP);
-        if (color == null) {
-            findViewById(R.id.MainRelativeLayout).setBackgroundColor(Color.parseColor("#7DB0D8"));
-        } else {
-            findViewById(R.id.MainRelativeLayout).setBackgroundColor(Color.parseColor(color));
-        }
+        super.setOrientation();
+        super.setColorBackground(R.id.MainRelativeLayout);
 
         initializeAttributes();
         setOnClick();
+
 
     }
 
@@ -71,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         map.setOnClickListener(view -> {
-            final Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            final Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             intent.putExtra(COLOR_PROP, this.color);
             startActivity(intent);
         });

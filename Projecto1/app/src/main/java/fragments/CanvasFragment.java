@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import sensors.SensorHelper;
 import views.CanvasView;
 
 /**
@@ -17,6 +18,7 @@ public class CanvasFragment extends Fragment {
 
     CanvasView canvasView;
     GestureDetector detector;
+    SensorHelper sensorHelper;
 
     public CanvasFragment(final GestureDetector detector) {
         this.detector = detector;
@@ -27,7 +29,21 @@ public class CanvasFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         this.canvasView = new CanvasView(container.getContext(), null, this.detector);
+        sensorHelper = new SensorHelper(getContext());
+        sensorHelper.setView(canvasView);
         return canvasView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorHelper.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorHelper.onPause();
     }
 
 }

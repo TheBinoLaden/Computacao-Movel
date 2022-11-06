@@ -15,26 +15,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class CanvasView extends View implements View.OnTouchListener {
 
     private static final String COLORPAINT = "colorPaint";
     private final GestureDetector mGestureDetector;
-    private final Random rand;
     private final Map<Path, Paint> pathHistory;
     private final Map<Integer, Path> pathIndex;
     private final Paint paint = new Paint();
     private final Path path = new Path();
+    private final int backGroundColor = Color.WHITE;
     private int color;
-    private int backGroundColor = Color.WHITE;
 
     public CanvasView(Context context, AttributeSet attrs, GestureDetector mGestureDetector) {
         super(context, attrs);
         this.mGestureDetector = mGestureDetector;
         setOnTouchListener(this);
         setBackgroundColor(backGroundColor);
-        this.rand = new Random();
         initPaint();
         pathHistory = new HashMap<>(0);
         pathIndex = new HashMap<>(0);
@@ -103,13 +100,11 @@ public class CanvasView extends View implements View.OnTouchListener {
         return true;
     }
 
-    public void changeBackground() {
-        backGroundColor = Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
-        setBackgroundColor(backGroundColor);
-    }
-
     public void erase() {
         paint.setColor(backGroundColor);
+        pathHistory.clear();
+        pathIndex.clear();
+        invalidate();
     }
 
     private void initPaint() {
@@ -119,5 +114,6 @@ public class CanvasView extends View implements View.OnTouchListener {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
     }
+
 
 }
